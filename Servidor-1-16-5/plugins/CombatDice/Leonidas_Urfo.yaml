@@ -1,0 +1,16 @@
+Jugador:
+  UUID: 2
+  sUUID: 2
+  nombre: Leonidas_Urfo
+  enCombate: false
+  miTurno: false
+  MaxTurno: 0
+  stats:
+    Destreza: 0
+    Agilidad: 0
+    Fuerza: 0
+    Intelecto: 0
+    Constitucion: 0
+    Magia: 0
+    Restistencia: 0
+    Sabiduria: 0
