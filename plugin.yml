@@ -1,0 +1,9 @@
+main: LeonidasUrfo.CombatDice.CombatDice
+version: 24.07.2022-1221
+name: CombatDice
+
+commands:
+   CombatDice:
+      description: El comando básico de Combat Dice
+      aliases: cd
+      usage: "Uso: /cd [help | version | attack | defense | runAway | start | @player]"
