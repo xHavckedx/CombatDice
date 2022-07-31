@@ -9,6 +9,8 @@ public class Jugadores extends Player.Spigot{
 	private String nombre;
 	private boolean enCombate = false;
 	private boolean miTurno = false;
+	private int numeroAtaque;
+	private String contrincante;
 	private int MaxTurno;
 	private int Destreza;
 	private int Agilidad;
@@ -131,8 +133,24 @@ public class Jugadores extends Player.Spigot{
 		Sabiduria = sabiduria;
 	}
 	
+	public int getNumeroAtaque() {
+		return numeroAtaque;
+	}
+
+	public void setNumeroAtaque(int numeroAtaque) {
+		this.numeroAtaque = numeroAtaque;
+	}
+	
 	public void getAllInfo(Player player) {
 		player.sendMessage("nombre: "+getNombre()+" UUID: "+getsUUID()+" está en combate: "+isenCombate()+" es mi turno: "+isMiTurno()+" Máximo de turnos: "+getMaxTurno());
+	}
+	
+	public String getContrincante() {
+		return contrincante;
+	}
+
+	public void setContrincante(String contrincante) {
+		this.contrincante = contrincante;
 	}
 	
 	public Jugadores(String nombre, boolean enCombate) {

@@ -1,4 +1,4 @@
-package LeonidasUrfo.CombatDice.comandos;
+	package LeonidasUrfo.CombatDice.comandos;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,7 +24,7 @@ public class ComandoCombatDice implements CommandExecutor{
 	ComandoCombatDiceAttack ccda; 
 	ComandoCombatDiceDefense ccdd; 
 	ComandoCombatDiceRunAway ccdr;
-	ArrayList<Jugadores> jugadorstat = new ArrayList<Jugadores>();
+	static ArrayList<Jugadores> jugadorstat = new ArrayList<Jugadores>();
 	Jugadores jugadorstat1 = null;
 	Jugadores jugadorstat2 = null;
 	int intJugador1;
@@ -49,6 +49,7 @@ public class ComandoCombatDice implements CommandExecutor{
 			} else if(args[0].equalsIgnoreCase("start") && args.length == 3) {
 				if(jugadorstat.stream().map((n) -> n.getNombre()).collect(Collectors.toList()).contains(args[1]) &&
 						jugadorstat.stream().map((n) -> n.getNombre()).collect(Collectors.toList()).contains(jugador.getName())) {
+				
 					//si los jugadores existen, instancia una batalla, siempre y cuando el otro jugador acepte
 					jugador.sendMessage("Ahora si los jugadores ya tienen ficha.");
 					for(int i = 0; i < jugadorstat.size();i++) {
@@ -84,8 +85,10 @@ public class ComandoCombatDice implements CommandExecutor{
 				return true;
 					
 			} else if(args[0].equalsIgnoreCase("attack")) {
-				ccda = new ComandoCombatDiceAttack(cd);
+				ccda = new ComandoCombatDiceAttack(cd, jugadorstat);
 				ccda.onCommand(sender, comando, label, args);
+				System.out.println(jugadorstat.get(2).getNumeroAtaque());
+				System.out.println(jugadorstat.get(1).getNumeroAtaque());
 				return true;
 			} else if(args[0].equalsIgnoreCase("defense")) {
 				ccdd = new ComandoCombatDiceDefense(cd);
@@ -109,10 +112,15 @@ public class ComandoCombatDice implements CommandExecutor{
 					}
 				}
 				if(jugadorstat.get(intJugador2).isenCombate() == false) {
+					//establece los combatientes en combate
 					jugadorstat.get(intJugador1).setenCombate(true); 
 					jugadorstat.get(intJugador2).setenCombate(true); 
+					//agrega los turnos del combate a los jugadores
 					jugadorstat.get(intJugador1).setMaxTurno(Integer.parseInt(args[3])); 
-					jugadorstat.get(intJugador2).setMaxTurno(Integer.parseInt(args[3])); 
+					jugadorstat.get(intJugador2).setMaxTurno(Integer.parseInt(args[3]));
+					//indica el nombre del contrincante en cada jugador
+					jugadorstat.get(intJugador1).setContrincante(jugadorstat.get(intJugador2).getNombre());
+					jugadorstat.get(intJugador2).setContrincante(jugadorstat.get(intJugador1).getNombre());
 					
 					Bukkit.broadcastMessage(ChatColor.BLUE + "####################################################\nSe ha iniciado el combate entre " 
 							+ ChatColor.YELLOW + jugadorstat.get(intJugador1).getNombre() + ChatColor.BLUE + " y " + ChatColor.YELLOW + jugadorstat.get(intJugador2).getNombre()
