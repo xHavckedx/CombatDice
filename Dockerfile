@@ -16,6 +16,8 @@ ENV PATH="${PATH}:/jre1.8.0_341/bin"
 ENV JAVA_HOME=/jre1.8.0_341/bin
 
 WORKDIR /Servidor-1-16-5
+RUN export MINEIP=$(hostname -I)
+RUN sed -i "s/server-ip=/server-ip=${MINEIP}/" server.properties
 
 CMD bash
 ENTRYPOINT java -jar /Servidor-1-16-5/spigot.jar
