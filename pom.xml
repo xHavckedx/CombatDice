@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>CombatDice</groupId>
   <artifactId>CombatDice</artifactId>
-<!--  <version></version> -->
+  <version>13022023</version> 
   <build>
     <sourceDirectory>src</sourceDirectory>
     <plugins>
