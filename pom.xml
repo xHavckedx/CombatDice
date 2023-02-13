@@ -4,6 +4,12 @@
   <artifactId>CombatDice</artifactId>
   <version>13022023</version> 
   <build>
+    <resources>
+            <resource>
+                <directory>src/resources</directory>
+                <targetPath>LeonidasUrfo/CombatDice/</targetPath>
+            </resource>
+    </resources>
     <sourceDirectory>src</sourceDirectory>
     <plugins>
       <plugin>
