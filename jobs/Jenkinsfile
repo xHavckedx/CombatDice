@@ -14,6 +14,8 @@ pipeline {
                 script{
                     sh "echo moviendo el archivo dockerfile donde está el fragmento y hacer el artifact"
                     sh "mv jobs/Dockerfile target/Dockerfile"
+                }
+                docker.withRegistry('https://registry.hub.docker.com','docker'){
                     docker.build("xhavckedx/combatdice:${env.BUILD_NUMBER}")
                     docker.build("xhavckedx/combatdice:latest")
                     docker.image("xhavckedx/combatdice:${env.BUILD_NUMBER}").push()
