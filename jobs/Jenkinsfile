@@ -30,6 +30,7 @@ pipeline {
                     sh "mvn clean install package"
                     sh "echo moviendo el archivo dockerfile donde está el fragmento y hacer el artifact"
                     sh "mv jobs/Dockerfile target/Dockerfile"
+                    archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
                 }
             }
         }
@@ -49,7 +50,6 @@ pipeline {
     }
     post {
         success {
-            archiveArtifacts artifacts: '~/workspace/CombatDice-CI-CD-Pipeline@2/target/*.jar', fingerprint: true
             discordSend description: '''
             Build ${env.BUILD_NUMBER}
             Status: Success
