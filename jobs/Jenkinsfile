@@ -47,8 +47,8 @@ pipeline {
         }
     }
     post {
-        agent any
         success {
+            agent any
             archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
             discordSend description: '''
             Build ${env.BUILD_NUMBER}
