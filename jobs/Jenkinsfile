@@ -1,27 +1,29 @@
 pipeline {
-    agent {
-        docker{
-            image 'maven:3-openjdk-18'
-            args '-v /root/.m2:/root/.m2'
-        }
-    }
+    agent none
     environment {
         DC_WEBHOOK = credentials('GITHUB-HOOK-DEVOPS')
     }
     stages {
         stage('Build') {
+            agent { 
+                docker{
+                    image 'maven:3-openjdk-18'
+                    args '-v /root/.m2:/root/.m2'
+                }
+            }
             steps {
                 script{
                     sh "echo generando el fragmento jar"
                     sh "mvn clean install package"
+                    sh "echo moviendo el archivo dockerfile donde está el fragmento y hacer el artifact"
+                    sh "mv jobs/Dockerfile target/Dockerfile"
+                    sh "pwd"
                 }
             }
         }
         stage('Deploy'){
             steps {
                 script{
-                    sh "echo moviendo el archivo dockerfile donde está el fragmento y hacer el artifact"
-                    sh "mv jobs/Dockerfile target/Dockerfile"
                     docker.withRegistry('https://registry.hub.docker.com','13ff1e12-98d9-4af3-bb62-10281237fc75'){
                         def app_version =docker.build("xhavckedx/combatdice:${env.BUILD_NUMBER}", "./target/.")
                         def app_latest = docker.build("xhavckedx/combatdice:latest", "./target/.")
