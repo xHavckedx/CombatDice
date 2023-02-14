@@ -49,7 +49,7 @@ pipeline {
     }
     post {
         success {
-            archiveArtifacts artifacts: '*/target/*.jar', fingerprint: true
+            archiveArtifacts artifacts: '~/workspace/CombatDice-CI-CD-Pipeline@2/target/*.jar', fingerprint: true
             discordSend description: '''
             Build ${env.BUILD_NUMBER}
             Status: Success
