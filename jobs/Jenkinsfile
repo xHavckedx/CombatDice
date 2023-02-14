@@ -30,9 +30,10 @@ pipeline {
     post {
         success {
             archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
-            discordSend description: "Build ${env.BUILD_NUMBER}
+            discordSend description: '''
+            Build ${env.BUILD_NUMBER}
             Status: Success
-            --------------", footer: "[ComatDice.jar](${env.RUN_ARTIFACTS_DISPLAY_URL})", link: env.BUILD_URL, result: currentBuild.currentResult, title: JOB_NAME, webhookURL: DC_WEBHOOK
+            -------------- ''', footer: "[ComatDice.jar](${env.RUN_ARTIFACTS_DISPLAY_URL})", link: env.BUILD_URL, result: currentBuild.currentResult, title: JOB_NAME, webhookURL: DC_WEBHOOK
         }
     }
 }
