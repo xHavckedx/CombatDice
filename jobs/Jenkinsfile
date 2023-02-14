@@ -21,6 +21,7 @@ pipeline {
             agent{
                 docker{
                     image 'maven:3.8.7-openjdk-18'
+                    args '-v /var/jenkins_home/workspace/CombatDice-CI-CD-Pipeline/target:/var/jenkins_home/workspace/CombatDice-CI-CD-Pipeline/target'
                 }
             }
             steps {
