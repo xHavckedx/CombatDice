@@ -14,12 +14,12 @@ pipeline {
                 script{
                     sh "echo moviendo el archivo dockerfile donde está el fragmento y hacer el artifact"
                     sh "mv jobs/Dockerfile target/Dockerfile"
-                }
-                docker.withRegistry('https://registry.hub.docker.com','13ff1e12-98d9-4af3-bb62-10281237fc75'){
-                    def app_version =docker.build("xhavckedx/combatdice:${env.BUILD_NUMBER}", "./target/.")
-                    def app_latest = docker.build("xhavckedx/combatdice:latest", "./target/.")
-                    app_version.push()
-                    app_latest.push()
+                    docker.withRegistry('https://registry.hub.docker.com','13ff1e12-98d9-4af3-bb62-10281237fc75'){
+                        def app_version =docker.build("xhavckedx/combatdice:${env.BUILD_NUMBER}", "./target/.")
+                        def app_latest = docker.build("xhavckedx/combatdice:latest", "./target/.")
+                        app_version.push()
+                        app_latest.push()
+                    }
                 }
             }
         }
