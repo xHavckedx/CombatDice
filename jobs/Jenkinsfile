@@ -30,7 +30,7 @@ pipeline {
     post {
         success {
             archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
-            discordSend webhookURL: "${DC_WEBHOOK}"
+            discordSend link: env.BUILD_URL, result: currentBuild.currentResult, title: JOB_NAME, webhookURL: DC_WEBHOOK
         }
     }
 }
