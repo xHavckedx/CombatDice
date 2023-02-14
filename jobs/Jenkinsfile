@@ -20,7 +20,7 @@ pipeline {
             agent { 
                 docker{
                     image 'maven:3-openjdk-18'
-                    args '-v /var/jenkins_home/workspace/CombatDice\ CI\ CD\ SCM/target:/var/jenkins_home/workspace/CombatDice\ CI\ CD\ SCM/target'
+                    args '-v /var/jenkins_home/workspace/CombatDice \CI \CD \SCM/target:/var/jenkins_home/workspace/CombatDice \CI \CD \SCM/target'
                 }
             }
             steps {
