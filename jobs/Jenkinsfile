@@ -15,6 +15,7 @@ pipeline {
                 docker.build("xhavckedx/combatdice:latest")
                 docker.image("xhavckedx/combatdice:${env.BUILD_NUMBER}").push()
                 docker.image("xhavckedx/combatdice:latest").push()
+            }
         }
         post{
             success {
