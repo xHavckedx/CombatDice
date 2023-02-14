@@ -1,6 +1,8 @@
 pipeline {
     agent any
     stages {
+        def app_latest
+        def app_version
         stage('Build') {
             steps {
                sh "echo generando el fragmento"
@@ -16,10 +18,10 @@ pipeline {
                     sh "mv jobs/Dockerfile target/Dockerfile"
                 }
                 docker.withRegistry('https://registry.hub.docker.com','13ff1e12-98d9-4af3-bb62-10281237fc75'){
-                    docker.build("xhavckedx/combatdice:${env.BUILD_NUMBER}")
-                    docker.build("xhavckedx/combatdice:latest")
-                    docker.image("xhavckedx/combatdice:${env.BUILD_NUMBER}").push()
-                    docker.image("xhavckedx/combatdice:latest").push()
+                    app_version =docker.build("xhavckedx/combatdice:${env.BUILD_NUMBER}", "jobs/.")
+                    app_latest = docker.build("xhavckedx/combatdice:latest" "jobs/.")
+                    app_version.push()
+                    app_latest.push()
                 }
             }
         }
