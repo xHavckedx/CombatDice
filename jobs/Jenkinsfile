@@ -4,9 +4,9 @@ pipeline {
         stage('Build') {
             steps {
                sh "echo generando el fragmento"
-            }
-            withMaven(maven:'maven'){
+               withMaven(maven:'maven'){
                     sh "mvn clean install package"
+                }
             }
         }
         stage('Deploy'){
