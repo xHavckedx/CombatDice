@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    enviroment{
-    
-    }
     stages {
         stage('Build') {
             steps {
@@ -14,10 +11,15 @@ pipeline {
             steps {
                sh "echo moviendo el archivo dockerfile donde está el fragmento y hacer el artifact"
                sh "mv jobs/Dockerfile target/Dockerfile"
-               sh '''
-                   docker build . -t ${BUILD_VERSION}
-                   docker push xhavckedx/combatdice:${BUILD_VERSION}
-               '''
+                docker.build("xhavckedx/combatdice:${env.BUILD_NUMBER}")
+                docker.build("xhavckedx/combatdice:latest")
+                docker.image("xhavckedx/combatdice:${env.BUILD_NUMBER}").push()
+                docker.image("xhavckedx/combatdice:latest").push()
+        }
+        post{
+            success {
+                archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+            }
         }
     }
 }
