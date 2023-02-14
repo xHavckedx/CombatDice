@@ -46,6 +46,7 @@ pipeline {
             }
         }
     }
+    agent any
     post {
         success {
             archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
