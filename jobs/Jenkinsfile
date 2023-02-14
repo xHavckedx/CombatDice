@@ -11,8 +11,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-               sh "echo generando el fragmento jar"
-               withMaven(maven: 'mavenjenkins') {
+                script{
+                    sh "echo generando el fragmento jar"
                     sh "mvn clean install package"
                 }
             }
