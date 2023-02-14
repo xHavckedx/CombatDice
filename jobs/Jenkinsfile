@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        DC-WEBHOOK = credentials('GITHUB-HOOK-DEVOPS')
+    }
     stages {
         stage('Build') {
             steps {
@@ -27,6 +30,7 @@ pipeline {
     post {
         success {
             archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+            discordSend webhookURL: DC-WEBHOOK
         }
     }
 }
