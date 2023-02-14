@@ -1,10 +1,23 @@
 pipeline {
     agent any
+    enviroment{
+    
+    }
     stages {
         stage('Build') {
             steps {
+               sh "echo generando el fragmento"
                sh "mvn clean install package"
             }
+        }
+        stage('Deploy'){
+            steps {
+               sh "echo moviendo el archivo dockerfile donde está el fragmento y hacer el artifact"
+               sh "mv jobs/Dockerfile target/Dockerfile"
+               sh '''
+                   docker build . -t ${BUILD_VERSION}
+                   docker push xhavckedx/combatdice:${BUILD_VERSION}
+               '''
         }
     }
 }
