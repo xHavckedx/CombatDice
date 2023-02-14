@@ -34,6 +34,7 @@ pipeline {
             }
         }
         stage('Deploy'){
+            agent any
             steps {
                 script{
                     docker.withRegistry('https://registry.hub.docker.com','13ff1e12-98d9-4af3-bb62-10281237fc75'){
